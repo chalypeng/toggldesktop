@@ -44,6 +44,7 @@
     <!-- derived colors: -->
     <Color x:Key="Toggl.FivePercentBlackColor">#2D2D2D</Color>
     <Color x:Key="Toggl.TransparentBlackColor">#002D2D2D</Color>
+    <Color x:Key="Toggl.TimelineTimeColor">#555500</Color>
 
     <SolidColorBrush x:Key="Toggl.SelectionElements.Background" Color="{StaticResource Toggl.SelectionElements.BackgroundColor}" po:Freeze="True" />
     <SolidColorBrush x:Key="Toggl.SelectionElements.Border" Color="{StaticResource Toggl.Grayish1Color}" po:Freeze="True" />
@@ -106,5 +107,5 @@
     <SolidColorBrush x:Key="Toggl.PopupBorderBrush" Color="{StaticResource Toggl.LightGrayColor}" />
     <SolidColorBrush x:Key="Toggl.WorkspaceSeparator" Color="{StaticResource Toggl.BlackColor}" Opacity="0.05" po:Freeze="True"/>
     <DropShadowEffect x:Key="Toggl.DropDownShadow" ShadowDepth="1" BlurRadius="4" Direction="270" Opacity="0.3" Color="Black" />
-
+    <SolidColorBrush x:Key="Toggl.TimelineTimeBrush" Color="{StaticResource Toggl.TimelineTimeColor}" po:Freeze="True"/>
 </ResourceDictionary>
