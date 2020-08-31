@@ -30,10 +30,28 @@ namespace TogglDesktop.ViewModels
             }
         }
 
-        private void HandleDisplayTimeline(bool open, string date, List<Toggl.TogglTimelineChunkView> first, List<Toggl.TogglTimeEntryView> firstTimeEntry, ulong startDay, ulong endDay)
+        private void HandleDisplayTimeline(bool open, string date, List<Toggl.TimelineChunkView> first, List<Toggl.TogglTimeEntryView> firstTimeEntry, ulong startDay, ulong endDay)
         {
             SelectedDate = Toggl.DateTimeFromUnix(startDay);
             TimeEntries = firstTimeEntry;
+            ConvertChunksToIntervals(first);
+        }
+
+        public void ConvertChunksToIntervals(List<Toggl.TimelineChunkView> chunks)
+        {
+            var offsets = new List<double>();
+            foreach (var chunk in chunks)
+            {
+                var offset = 0d;
+                if (chunk.Events.Any())
+                {
+                    var start = Toggl.DateTimeFromUnix(chunk.Started);
+                    offset = (start - new DateTime(start.Year, start.Month, start.Day)).TotalMinutes;
+                }
+                offsets.Add((offset * 24 * 200) / (24 * 60));
+                
+            }
+            ActivityBlockOffsets = offsets;
         }
 
         [Reactive] 
@@ -48,10 +66,12 @@ namespace TogglDesktop.ViewModels
 
         public ReactiveCommand<Unit, Unit> SelectNextDay { get; }
 
-        [Reactive]
         public List<DateTime> HourViews { get; }
 
         [Reactive]
         public List<Toggl.TogglTimeEntryView> TimeEntries { get; private set; }
+
+        [Reactive]
+        public List<double> ActivityBlockOffsets { get; private set; }
     }
 }
